@@ -28,10 +28,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ASCII\text.fs">
+    <None Include="text.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\ASCII\text.vs">
+    <None Include="text.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

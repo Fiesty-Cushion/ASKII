@@ -154,8 +154,8 @@
     <ClInclude Include="..\ASCII\Shader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ASCII\text.fs" />
-    <None Include="..\ASCII\text.vs" />
+    <None Include="text.frag" />
+    <None Include="text.vert" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\ASCII\Lucidia_Sans.ttf" />
