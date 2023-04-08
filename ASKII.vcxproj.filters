@@ -21,35 +21,8 @@
     <ClCompile Include="..\ASCII\textRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\ASCII\VAO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ASCII\VBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ASCII\EBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ASCII\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ASCII\shaderClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ASCII\shaderClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ASCII\VAO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ASCII\VBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ASCII\EBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\ASCII\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -59,12 +32,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="..\ASCII\text.vs">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\ASCII\default.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\ASCII\default.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
