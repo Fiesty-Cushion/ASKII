@@ -18,7 +18,13 @@
     <ClCompile Include="..\ASCII\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\ASCII\textRender.cpp">
+    <ClCompile Include="image2ascii.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="webcam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,5 +45,14 @@
     <Font Include="..\ASCII\Lucidia_Sans.ttf">
       <Filter>Resource Files</Filter>
     </Font>
+    <Font Include="RobotoMono-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="profile.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="asciii.txt" />
   </ItemGroup>
 </Project>
