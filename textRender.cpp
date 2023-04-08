@@ -1,6 +1,8 @@
 #include <iostream>
 #include <map>
+#include <vector>
 #include <string>
+#include <fstream>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -33,7 +35,7 @@ struct Character {
 std::map<GLchar, Character> Characters;
 unsigned int VAO, VBO;
 
-int main()
+int testmain()
 {
     // glfw: initialize and configure
     // ------------------------------
@@ -74,7 +76,7 @@ int main()
 
     // compile and setup the shader
     // ----------------------------
-    Shader shader("text.vs", "text.fs");
+    Shader shader("text.vert", "text.frag");
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(SCR_WIDTH), 0.0f, static_cast<float>(SCR_HEIGHT));
     shader.use();
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
@@ -90,7 +92,7 @@ int main()
     }
 
     // find path to font
-    std::string font_name = "Lucidia_Sans.ttf";
+    std::string font_name = "RobotoMono-Regular.ttf";
     if (font_name.empty())
     {
         std::cout << "ERROR::FREETYPE: Failed to load font_name" << std::endl;
@@ -167,6 +169,29 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
+    //---------------------------------------------------------------------------------------
+
+    std::vector<std::string> lines;
+    std::string line;
+
+    std::fstream ascii;
+    ascii.open("asciii.txt", std::ios::in);
+
+    if (ascii.is_open())
+    {
+        while (std::getline(ascii, line))
+        {
+            lines.push_back(line);
+        }
+        ascii.close();
+    }   
+    std::cout << "--------------------------------------------" << "\n";
+    std::cout << lines.size() << std::endl;
+
+    //---------------------------------------------------------------------------------------
+
+    float y = 600;
+
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -177,12 +202,18 @@ int main()
 
         // render
         // ------
-        glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+        glClearColor( 39.f/255.f, 39.f/255.f, 39.f/255.f, 1.f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        RenderText(shader, "% * * * * * * * * + . . . . . . . . .                             . . . . . . . . :   . . - - - - = = = = =         = = = = = - - * * - . . . . . . . . . . . #", 25.0f, 25.0f, 0.4f, glm::vec3(0.5, 0.8f, 0.2f));
-        RenderText(shader, "(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
 
+        for (auto& elem : lines)
+        {
+            RenderText(shader, elem, 20.0f, y, 0.2f, glm::vec3(1.f, 1.f, 1.f));
+            y -= 10;
+        }
+        y = 900;
+        
+        
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
