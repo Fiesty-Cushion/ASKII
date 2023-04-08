@@ -147,24 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\ASCII\EBO.cpp" />
     <ClCompile Include="..\ASCII\glad.c" />
-    <ClCompile Include="..\ASCII\Main.cpp" />
-    <ClCompile Include="..\ASCII\shaderClass.cpp" />
     <ClCompile Include="..\ASCII\textRender.cpp" />
-    <ClCompile Include="..\ASCII\VAO.cpp" />
-    <ClCompile Include="..\ASCII\VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ASCII\EBO.h" />
     <ClInclude Include="..\ASCII\Shader.h" />
-    <ClInclude Include="..\ASCII\shaderClass.h" />
-    <ClInclude Include="..\ASCII\VAO.h" />
-    <ClInclude Include="..\ASCII\VBO.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ASCII\default.frag" />
-    <None Include="..\ASCII\default.vert" />
     <None Include="..\ASCII\text.fs" />
     <None Include="..\ASCII\text.vs" />
   </ItemGroup>
