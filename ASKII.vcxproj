@@ -149,25 +149,18 @@
   <ItemGroup>
     <ClCompile Include="..\ASCII\glad.c" />
     <ClCompile Include="image2ascii.cpp" />
-    <ClCompile Include="webcam.cpp" />
     <ClCompile Include="textRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ASCII\Shader.h" />
+    <ClInclude Include="image2ascii.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="text.frag" />
     <None Include="text.vert" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="..\ASCII\Lucidia_Sans.ttf" />
     <Font Include="RobotoMono-Regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="asciii.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="profile.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
