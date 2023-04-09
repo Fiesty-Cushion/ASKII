@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <opencv2/opencv.hpp>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -15,6 +16,7 @@
 #include FT_FREETYPE_H
 
 #include "Shader.h"
+#include "image2ascii.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
@@ -35,7 +37,7 @@ struct Character {
 std::map<GLchar, Character> Characters;
 unsigned int VAO, VBO;
 
-int testmain()
+int main()
 {
     // glfw: initialize and configure
     // ------------------------------
@@ -50,7 +52,7 @@ int testmain()
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "ASCII Webcam", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -169,49 +171,47 @@ int testmain()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    //---------------------------------------------------------------------------------------
 
-    std::vector<std::string> lines;
-    std::string line;
+    // Get frames from webcam using OpenCV
+    // -----------------------------------
+    cv::Mat frame;
+    cv::VideoCapture cap(0);
 
-    std::fstream ascii;
-    ascii.open("asciii.txt", std::ios::in);
-
-    if (ascii.is_open())
+    if (!cap.isOpened())
     {
-        while (std::getline(ascii, line))
-        {
-            lines.push_back(line);
-        }
-        ascii.close();
-    }   
-    std::cout << "--------------------------------------------" << "\n";
-    std::cout << lines.size() << std::endl;
+        std::cout << "ERROR::OPENCV Unable to access Webcam..." << std::endl;
+        return -1;
+    }
 
-    //---------------------------------------------------------------------------------------
+    // Position text in window
+    // -----------------------
+    float offset = 15.f;
+    float y = 760.f;
+    float y_advance = 16.f;
 
-    float y = 600;
 
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
     {
-        // input
-        // -----
-        processInput(window);
-
         // render
         // ------
         glClearColor( 39.f/255.f, 39.f/255.f, 39.f/255.f, 1.f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // Get each frame from webcam and convert to ASCII equivalent
+        // ----------------------------------------------------------
+        cap >> frame;
+        std::vector<std::string> lines = image2ascii(frame);
 
-        for (auto& elem : lines)
+        // Renders ASCII lines
+        // -------------------
+        for (auto& line: lines)
         {
-            RenderText(shader, elem, 20.0f, y, 0.2f, glm::vec3(1.f, 1.f, 1.f));
-            y -= 10;
+            RenderText(shader, line, 100.f, y, 0.5f,glm::vec3(255.f/255, 250.f/255, 250.f/255));
+            y = y - y_advance;
         }
-        y = 900;
+        y = 760;       
         
         
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -219,6 +219,10 @@ int testmain()
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    // Deconstruct OpenCV Objects
+    cap.release();
+    cv::destroyAllWindows();
 
     glfwTerminate();
     return 0;
@@ -287,4 +291,5 @@ void RenderText(Shader& shader, std::string text, float x, float y, float scale,
     }
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+    
 }
