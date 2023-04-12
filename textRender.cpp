@@ -174,7 +174,8 @@ int main()
 
     // Get frames from webcam using OpenCV
     // -----------------------------------
-    cv::Mat frame;
+    cv::Mat originalFrame;
+    cv::Mat mirroredFrame;
     cv::VideoCapture cap(0);
 
     if (!cap.isOpened())
@@ -201,8 +202,9 @@ int main()
 
         // Get each frame from webcam and convert to ASCII equivalent
         // ----------------------------------------------------------
-        cap >> frame;
-        std::vector<std::string> lines = image2ascii(frame);
+        cap >> originalFrame;
+        cv::flip(originalFrame, mirroredFrame, 1);
+        std::vector<std::string> lines = image2ascii(mirroredFrame);
 
         // Renders ASCII lines
         // -------------------
